@@ -1,0 +1,61 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+    <div class="container mt-4">
+        <form action="#" method="POST" enctype="multipart/form-data">
+            <div class="input-group">
+                <input type="file" class="form-control" name="image_name" required>
+                <input type="submit" value="Upload" class="btn btn-outline-secondary">
+            </div>
+        </form>
+    </div>
+
+    {% if upload %}
+        <div class="container mt-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2>Uploaded Image</h2>
+                    <img class="rounded img-fluid" src="/static/upload/{{ upload_image }}" alt="">
+                </div>
+                <div class="col-md-6">
+                    <h2>Predicted Image</h2>
+                    <img class="rounded img-fluid" src="/static/predict/{{ upload_image }}" alt="">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>License Plate Information</h2>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col">Number of Licence Plates Detected</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{ no }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-bordered" style="width: 100%;">
+                        <thead>
+                            <tr>
+                                <th scope="col">Detected License Plates</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for lic in text %}
+                            <tr>
+                                <td style="background-color: #ffea2f;">
+                                    <p class="display-8">{{ lic }}</p>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
